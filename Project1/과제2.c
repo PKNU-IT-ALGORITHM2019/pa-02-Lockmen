@@ -18,14 +18,14 @@ void swap(coordinate spot[], int a, int b);
 
 
 
-double tsp(coordinate spot[], int k, double min) { //prefix 0~k-1  
-	if (k == N) {                               //set k~n-1
+double tsp(coordinate spot[], int k, double min) { //prefix 0~k-1  set k~N-1
+	if (k == N) { //  모든 배열이 prefix                       
 
 		return total(N, spot);
 	}
 
 	for (int i = k; i < N; i++) {
-		swap(spot, k, i); // 한 좌표씩 대장을 시켜준 
+		swap(spot, k, i); // 한 좌표씩 대장을 시켜준다
 		double tmp = tsp(spot, k + 1, min);
 		if (min> tmp) {
 			min = tmp;
@@ -33,12 +33,12 @@ double tsp(coordinate spot[], int k, double min) { //prefix 0~k-1
 				for (int i = 0; i < N; i++)
 					visit[i] = spot[i].index;
 		}
-		swap(spot, k, i); //전과 후 동일성 유 
+		swap(spot, k, i); //전과 후 동일성 유지
 	}
 	return min;
 }
 
-double total(int N, coordinate a[]) //총 이동 거
+double total(int N, coordinate a[]) //총 이동 거리
 {
 	double sum = 0;
 	for (int i = 0; i < N; i++) {
